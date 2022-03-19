@@ -1,0 +1,38 @@
+.header {
+  height: 100vh;
+  width: 100vw;
+  background-color: transparent;
+  background-color: aqua;
+}
+
+.header-wrapper-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  height: 10%;
+  margin: 0 auto;
+}
+
+.nav-container {
+  width: 100%;
+}
+
+.nav {
+  display: flex;
+}
+
+.nav-list {
+  width: 60%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.search-container {
+  width: 40%;
+}
+
+.search-input {
+  background-color: aliceblue;
+  width: 100%;
+}
