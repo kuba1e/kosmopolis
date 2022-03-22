@@ -1,4 +1,5 @@
 import React from "react";
+import "./filters.css";
 
 const Filters = (props) => {
   return (
@@ -6,7 +7,7 @@ const Filters = (props) => {
       <div className="filter">
         <label className="filter-label">
           Cinema
-          <select className="filter-select" name="select">
+          <select className="filter-select" name="select" defaultValue={""}>
             <option className="filter-option" value="london">
               London
             </option>
@@ -28,7 +29,7 @@ const Filters = (props) => {
       <div className="filter">
         <label className="filter-label">
           Cinema
-          <select className="filter-select" name="select">
+          <select className="filter-select" name="select" defaultValue={""}>
             <option className="filter-option" value="london">
               London
             </option>
@@ -50,7 +51,7 @@ const Filters = (props) => {
       <div className="filter">
         <label className="filter-label">
           Cinema
-          <select className="filter-select" name="select">
+          <select className="filter-select" name="select" defaultValue={""}>
             <option className="filter-option" value="london">
               London
             </option>
@@ -70,14 +71,13 @@ const Filters = (props) => {
         </label>
       </div>
       <div className="search-filter">
-          <input type='text'/>
-          <div className="search-filter-shape">
+        <input type="text" defaultValue={''}/>
+        <div className="search-filter-shape">
           <i className="fa-solid fa-magnifying-glass"></i>
-          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-
-export default Filters
+export default Filters;

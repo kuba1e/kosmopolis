@@ -1,28 +1,23 @@
 import React, { useEffect } from "react";
+import './home-page.css'
 import Filters from "../../filters";
 import ItemList from "../../item-list";
 import {connect} from 'react-redux'
-import store from "../../../store";
+import {getPopularMovies} from "../../async-foo/async-foo";
+import { bindActionCreators } from "redux";
 
-import getBooks from "../../async-foo/async-foo";
-
-const {dispatch} = store
-
-
-const HomePage = (props)=>{
-  
+const HomePage = ({movies, loading, error, fetchPopularMovies})=>{
+  console.log(loading)
   useEffect(()=>{
-    dispatch(getBooks())
+    fetchPopularMovies()
   }, [])
 
-  const {movies} = props
-  console.log(movies)
 
   return (
     <section className="section">
-      <div className="section-inner-container">
+      <div className="section-inner-container wrapper">
         <div className="section-title">
-            <h2 className="section-title-text">The most popular movies</h2>
+            <h2 className="section-title-text">Popular movies</h2>
         </div>
         <Filters/>
         <ItemList items={movies}/>
@@ -36,10 +31,19 @@ const HomePage = (props)=>{
   )
 }
 
-const mapStateToProps=(state)=>{
+const mapStateToProps=({popularMovies:{popularMoviesData:movies, loading, error}})=>{
   return {
-    movies: state.movies.moviesData
+    movies,
+    loading,
+    error
   }
 }
 
-export default  connect(mapStateToProps)(HomePage)
+const mapDispatchToProps = (dispatch, {movieService})=>{
+  return bindActionCreators({
+    fetchPopularMovies:getPopularMovies(movieService)
+  }, dispatch)
+}
+
+
+export default  connect(mapStateToProps, mapDispatchToProps)(HomePage)

@@ -5,7 +5,7 @@ import "./header.css";
 const Header = (props) => {
   return (
     <header className="header">
-      <div className="header-wrapper-inner">
+      <div className="header-wrapper-inner wrapper">
         <div className="nav-container">
           <nav className="nav">
             <ul className="nav-list">
@@ -13,22 +13,15 @@ const Header = (props) => {
                 <h2>Kosmopolis</h2>
               </Link>
               <li className="nav-li-item">
-                <Link to="films/">Films</Link>
+                <Link to="movies/">Films</Link>
               </li>
               <li className="nav-li-item">
                 <Link to="serials/">TV Serials</Link>
               </li>
               <li className="nav-li-item">
-                <Link to="serials/">TV Serials</Link>
-              </li>
-              <li className="nav-li-item">
-                <Link to="serials/">TV Serials</Link>
+                <Link to="upcoming/">Upcoming</Link>
               </li>
             </ul>
-            <div className="search-container">
-              <input className="search-input"></input>
-              
-            </div>
           </nav>
         </div>
       </div>

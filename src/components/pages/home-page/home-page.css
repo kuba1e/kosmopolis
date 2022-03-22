@@ -1,0 +1,38 @@
+.section-title {
+  display: block;
+  font-size: 54px;
+  font-weight: 700;
+  padding: 100px 0;
+}
+
+.section-title-text {
+  line-height: 1.5;
+  border: solid 0;
+  padding-left: 30px;
+  border-left-width: 5px;
+  border-left-color: red;
+}
+
+.section-control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-control-line {
+  height: 1px;
+  width: 70%;
+  background-color: rgb(164, 172, 171);
+  border-radius: 5px;
+}
+
+.section-control-btn {
+  text-align: center;
+  font-weight: 700;
+  font-size: 22px;
+  width: 20%;
+  height: 70px;
+  background-color: red;
+  border-radius: 10px;
+  cursor: pointer;
+}

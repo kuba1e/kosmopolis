@@ -1,23 +1,35 @@
-const movieList=(state, action)=>{
-  if(state === undefined){
+const movieList = (state, action) => {
+  if (state === undefined) {
     return {
-      loading:false,
-      moviesData: [], 
-      error:false
-    }
+      loading: true,
+      moviesData: [],
+      error: false,
+    };
   }
 
-  switch (action.type){
-    case 'GOT_POPULAR_MOVIES':
-        return {
-          ...state.movies,
-          moviesData: [...state.movies.moviesData,...action.payload]
-        }
+  switch (action.type) {
+    case "REQUESTED_MOVIES":
+      return {
+        ...state.movies,
+        loading: true,
+      };
+    case "DOWNLOADED_MOVIES":
+      return {
+        ...state.movies,
+        loading: false,
+        error: false,
+        moviesData: [...action.payload],
+      };
+    case "FAILED_TO_DOWNLOADED_MOVIES":
+      return {
+        ...state.movies,
+        loading: false,
+        error: true,
+      };
 
-    default: return state.movies   
-
+    default:
+      return state.movies;
   }
+};
 
-}
-
-export default movieList
+export default movieList;

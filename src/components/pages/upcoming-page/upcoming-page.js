@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
-import "./tv-serials-page.css";
+import "./upcoming-page.css";
 import ItemList from "../../item-list/item-list";
 import Filters from "../../filters";
 import { connect } from "react-redux";
-import { getTvSerials } from "../../async-foo/async-foo";
+import { getUpcomingMovies } from "../../async-foo/async-foo";
 import { bindActionCreators } from "redux";
 
-const TvSerialsPage = ({fetchTvSeries, error, loading, tvSerialsData}) => {
+const UpcomingPage = ({fetchUpcomingMovies, error, loading, upcomingMoviesData}) => {
   useEffect(()=>{
-    fetchTvSeries()
+    fetchUpcomingMovies()
   }, [])
 
 
@@ -16,10 +16,10 @@ const TvSerialsPage = ({fetchTvSeries, error, loading, tvSerialsData}) => {
     <section className="section">
       <div className="section-inner-container wrapper">
         <div className="section-title">
-          <h2 className="section-title-text">Popular TV serials</h2>
+          <h2 className="section-title-text">Upcoming movies</h2>
         </div>
         <Filters />
-        <ItemList items={tvSerialsData} />
+        <ItemList items={upcomingMoviesData} />
         <div className="section-control">
           <div className="section-control-line"></div>
           <button className="section-control-btn">See More</button>
@@ -29,9 +29,9 @@ const TvSerialsPage = ({fetchTvSeries, error, loading, tvSerialsData}) => {
   );
 };
 
-const mapStateToProps = ({ tvSerials: { tvSerialsData, loading, error } }) => {
+const mapStateToProps = ({ upcomingMovies: { upcomingMoviesData, loading, error } }) => {
   return {
-    tvSerialsData,
+    upcomingMoviesData,
     loading,
     error,
   };
@@ -39,8 +39,8 @@ const mapStateToProps = ({ tvSerials: { tvSerialsData, loading, error } }) => {
 
 const mapDispatchToProps = (dispatch, { movieService }) => {
   return bindActionCreators({
-    fetchTvSeries: getTvSerials(movieService),
+    fetchUpcomingMovies: getUpcomingMovies(movieService),
   }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TvSerialsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(UpcomingPage);
