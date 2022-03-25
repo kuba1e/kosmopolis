@@ -18,6 +18,16 @@ const failedToDownloadedMovies = (error) => ({
   payload: error,
 });
 
+const requestedSimilarMovies = () => ({ type: "REQUESTED_SIMILAR_MOVIES" });
+const downloadedSimilarMovies = (data) => ({
+  type: "DOWNLOADED_SIMILAR_MOVIES",
+  payload: data,
+});
+const failedToDownloadedSimilarMovies = (error) => ({
+  type: "FAILED_TO_DOWNLOADED_SIMILAR_MOVIES",
+  payload: error,
+});
+
 const requestedTvSerials = () => ({ type: "REQUESTED_TV_SERIALS" });
 const downloadedTvSerials = (data) => ({
   type: "DOWNLOADED_TV_SERIALS",
@@ -38,6 +48,17 @@ const failedToDownloadedUpcomigMovies = (error) => ({
   payload: error,
 });
 
+const requestedMovieDetails = () => ({ type: "REQUESTED_MOVIE_DETAILS" });
+const downloadedMovieDetails= (data) => ({
+  type: "DOWNLOADED_MOVIE_DETAILS",
+  payload: data,
+});
+const failedToDownloadedMovieDetails= (error) => ({
+  type: "FAILED_TO_DOWNLOADED_MOVIE_DETAILS",
+  payload: error,
+});
+
+
 export {
   requestedPopularMovies,
   failedToDownloadedPopularMovies,
@@ -51,4 +72,10 @@ export {
   requestedUpcomigMovies,
   downloadedtUpcomigMovies,
   failedToDownloadedUpcomigMovies,
+  requestedMovieDetails,
+  failedToDownloadedMovieDetails,
+  downloadedMovieDetails,
+  requestedSimilarMovies,
+  downloadedSimilarMovies,
+  failedToDownloadedSimilarMovies
 };

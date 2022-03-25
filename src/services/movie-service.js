@@ -1,5 +1,4 @@
 import noImage from "./no-image.png";
-
 export default class MovieService {
   _baseUrl = "https://api.themoviedb.org/3";
   _apiKey = "?api_key=0cdf453a2fe6e4473d259e845c6b04c5";
@@ -9,7 +8,7 @@ export default class MovieService {
     return await fetch(`${this._baseUrl}${url}${this._apiKey}`);
   };
 
-  fetchPopularContent = async (url, transformDataService) => {
+  fetchContent = async (url, transformDataService) => {
     try {
       const response = await this.fetchResource(url);
       const genresArray = await this._fetchGenres();
@@ -17,7 +16,8 @@ export default class MovieService {
         throw new Error(response.status);
       }
       const data = await response.json();
-      return transformDataService(data.results, genresArray);
+      const dataForTransf = data.results ?? data;
+      return transformDataService(dataForTransf, genresArray);
     } catch (error) {
       throw new Error(error);
     }
@@ -25,10 +25,7 @@ export default class MovieService {
 
   fetchPopularMovies = async () => {
     try {
-      return this.fetchPopularContent(
-        "/movie/popular",
-        this._transformMoviesData
-      );
+      return this.fetchContent("/movie/popular", this._transformMoviesData);
     } catch (error) {
       throw new Error(error);
     }
@@ -36,10 +33,7 @@ export default class MovieService {
 
   fetchTvSeries = async () => {
     try {
-      return this.fetchPopularContent(
-        "/tv/top_rated",
-        this._transformTvSeriesData
-      );
+      return this.fetchContent("/tv/top_rated", this._transformTvSeriesData);
     } catch (error) {
       throw new Error(error);
     }
@@ -47,10 +41,7 @@ export default class MovieService {
 
   fetchMovies = async () => {
     try {
-      return this.fetchPopularContent(
-        "/movie/top_rated",
-        this._transformMoviesData
-      );
+      return this.fetchContent("/movie/top_rated", this._transformMoviesData);
     } catch (error) {
       throw new Error(error);
     }
@@ -58,14 +49,29 @@ export default class MovieService {
 
   fetchUpcomingMovies = async () => {
     try {
-      return this.fetchPopularContent(
-        "/movie/upcoming",
-        this._transformMoviesData
-      );
+      return this.fetchContent("/movie/upcoming", this._transformMoviesData);
     } catch (error) {
       throw new Error(error);
     }
   };
+
+  fetchMovieDetails = async (id) => {
+    try {
+      return this.fetchContent(`/movie/${id}`, this._transformMovieDetails);
+    } catch (error) {
+      console.log(error);
+      throw new Error(error);
+    }
+  };
+
+  fetchSimilarMovies = async (id)=>{
+    try {
+      return this.fetchContent(`/movie/${id}/similar`, this._transformMoviesData);
+    } catch (error) {
+      console.log(error);
+      throw new Error(error);
+    }
+  }
 
   _fetchGenres = async () => {
     try {
@@ -99,7 +105,7 @@ export default class MovieService {
   _transformMoviesData = (data, genres) => {
     const preparedData = data.map((item) => {
       const {
-        backdrop_path = "",
+        backdrop_path = null,
         id,
         genre_ids,
         title,
@@ -118,9 +124,49 @@ export default class MovieService {
         date: this._transformDate(date),
       };
     });
+
     return preparedData;
   };
 
+  _transformMovieDetails = (data) => {
+    const arrayMovieDetails = [];
+    arrayMovieDetails.push(data);
+    return arrayMovieDetails.map(this._extractMovieDetails);
+  };
+
+  _extractMovieDetails = (data) => {
+    const {
+      backdrop_path = null,
+      id,
+      genres,
+      title,
+      overview,
+      vote_average: vote,
+      release_date: date,
+      homepage,
+      original_language: language,
+      original_title,
+      poster_path,
+      budget = null,
+      production_countries,
+    } = data;
+
+    return {
+      id,
+      genres: this._transformMovieDetailsGenre(genres),
+      img: this._getMoviesImgUrl(backdrop_path),
+      title: this._transformTitle(title),
+      overview,
+      vote,
+      date: this._transformDate(date),
+      homepage,
+      language,
+      original_title,
+      poster: this._getMoviesImgUrl(poster_path),
+      production_countries: this._extractCountryName(production_countries),
+      budget,
+    };
+  };
   _transformTvSeriesData = (data, genres) => {
     const preparedData = data.map((item) => {
       const {
@@ -153,7 +199,15 @@ export default class MovieService {
     return new Date(date).getFullYear();
   };
 
+  _transformMovieDetailsGenre = (genres) => {
+    return genres.map((genre) => genre.name);
+  };
+
   _transformTitle = (title) => {
     return title.length > 20 ? title.slice(0, 20) + "..." : title;
+  };
+
+  _extractCountryName = (countriesArray) => {
+    return countriesArray.map((country) => country.name);
   };
 }

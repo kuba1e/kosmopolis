@@ -13,13 +13,13 @@ const Header = (props) => {
                 <h2>Kosmopolis</h2>
               </Link>
               <li className="nav-li-item">
-                <Link to="movies/">Films</Link>
+                <Link to="/movies/">Films</Link>
               </li>
               <li className="nav-li-item">
-                <Link to="serials/">TV Serials</Link>
+                <Link to="/serials/">TV Serials</Link>
               </li>
               <li className="nav-li-item">
-                <Link to="upcoming/">Upcoming</Link>
+                <Link to="/upcoming/">Upcoming</Link>
               </li>
             </ul>
           </nav>

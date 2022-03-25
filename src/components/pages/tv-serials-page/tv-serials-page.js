@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./tv-serials-page.css";
-import ItemList from "../../item-list/item-list";
+import {ItemList} from "../../item-list/item-list";
 import Filters from "../../filters";
 import { connect } from "react-redux";
 import { getTvSerials } from "../../async-foo/async-foo";

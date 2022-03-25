@@ -27,4 +27,4 @@ const ItemList = ({ items }) => {
   );
 };
 
-export default ItemList;
+export {ItemList, renderFunction};

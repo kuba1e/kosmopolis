@@ -10,7 +10,13 @@ import {
   failedToDownloadedMovies,
   requestedUpcomigMovies,
   downloadedtUpcomigMovies,
-  failedToDownloadedUpcomigMovies
+  failedToDownloadedUpcomigMovies,
+  requestedMovieDetails,
+  downloadedMovieDetails,
+  failedToDownloadedMovieDetails,
+  requestedSimilarMovies,
+  downloadedSimilarMovies,
+  failedToDownloadedSimilarMovies
 } from "./actions";
 export {
   requestedPopularMovies,
@@ -24,5 +30,11 @@ export {
   failedToDownloadedMovies,
   requestedUpcomigMovies,
   downloadedtUpcomigMovies,
-  failedToDownloadedUpcomigMovies
+  failedToDownloadedUpcomigMovies,
+  requestedMovieDetails,
+  downloadedMovieDetails,
+  failedToDownloadedMovieDetails,
+  requestedSimilarMovies,
+  downloadedSimilarMovies,
+  failedToDownloadedSimilarMovies
 };

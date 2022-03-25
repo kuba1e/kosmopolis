@@ -1,13 +1,22 @@
 import React from "react";
 import "./item.css";
+import { useHistory } from "react-router-dom";
 
-const Item = ({ item: { img, title, date, genre, vote }, renderFunction }) => {
+const Item = ({
+  item: { id, img, title, date, genre, vote },
+  renderFunction,
+}) => {
+  const history = useHistory();
+  const goToItemDetails = (id) => {
+    history.push(`${id}`);
+  };
+
   return (
     <div className="item">
-      <div className="item-img-container">
+      <div className="item-img-container" >
         <img className="item-img" src={img} />
       </div>
-      <div className="item-title-container">
+      <div className="item-title-container" onClick={()=>goToItemDetails(id)}>
         <h5 className="item-title">{title}</h5>
       </div>
       <div className="item-subtitle-container">

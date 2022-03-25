@@ -1,2 +1,2 @@
-import ItemList from "./item-list";
-export default ItemList
+import {ItemList, renderFunction} from "./item-list";
+export  {ItemList, renderFunction}

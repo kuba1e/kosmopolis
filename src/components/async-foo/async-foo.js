@@ -11,6 +11,12 @@ import {
   requestedUpcomigMovies,
   downloadedtUpcomigMovies,
   failedToDownloadedUpcomigMovies,
+  requestedMovieDetails,
+  downloadedMovieDetails,
+  failedToDownloadedMovieDetails,
+  downloadedSimilarMovies,
+  failedToDownloadedSimilarMovies,
+  requestedSimilarMovies
 } from "../../actions";
 
 const getPopularMovies = (movieService) => () => {
@@ -62,4 +68,28 @@ const getUpcomingMovies = (movieService) => () => {
   };
 };
 
-export { getPopularMovies, getTvSerials, getMovies, getUpcomingMovies };
+const getMovie = (movieService)=>(id)=>{
+  return async dispatch =>{
+    try{
+      dispatch(requestedMovieDetails(id))
+      const movie = await movieService.fetchMovieDetails(id)
+      dispatch(downloadedMovieDetails(movie))
+    } catch(error){
+      dispatch(failedToDownloadedMovieDetails(error))
+    }
+  }
+}
+
+const getSimilarMovies = (movieService)=>(id)=>{
+  return async dispatch =>{
+    try{
+      dispatch(requestedSimilarMovies(id))
+      const movie = await movieService.fetchSimilarMovies(id)
+      dispatch(downloadedSimilarMovies(movie))
+    } catch(error){
+      dispatch(failedToDownloadedSimilarMovies(error))
+    }
+  }
+}
+
+export { getPopularMovies, getTvSerials, getMovies, getUpcomingMovies , getMovie, getSimilarMovies};

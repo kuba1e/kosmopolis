@@ -12,3 +12,7 @@
 .font-style {
   color: rgb(164, 172, 171);
 }
+
+.item-title-container {
+  cursor: pointer;
+}

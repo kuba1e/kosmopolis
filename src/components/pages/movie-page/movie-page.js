@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./movie-page.css";
-import ItemList from "../../item-list/item-list";
+import {ItemList} from "../../item-list/item-list";
 import Filters from "../../filters";
 import { connect } from "react-redux";
 import { getMovies } from "../../async-foo/async-foo";
